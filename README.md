@@ -51,7 +51,3 @@ bun dev
 ├── package.json
 └── tsconfig.json
 ```
-
-## 📝 ライセンス
-
-© 2025 Nasubiman. All Rights Reserved.
