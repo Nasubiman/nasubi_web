@@ -98,7 +98,7 @@ export default function Portfolio() {
             <section id="skills" className="border-t border-gray-200 pt-16">
               <h2 className="text-3xl font-bold tracking-tight text-gray-900 mb-8">Skills</h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {['Python', 'C++', 'C#', 'Git'].map(skill => (
+                {['Python', 'C++', 'C#', 'Git', 'TypeScript', 'Go'].map(skill => (
                   <div key={skill} className="bg-white border border-gray-200 rounded-xl p-4 text-center shadow-sm hover:shadow-md hover:border-blue-300 transition-all">
                     <p className="font-medium text-gray-800">{skill}</p>
                   </div>

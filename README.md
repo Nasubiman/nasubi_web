@@ -1,8 +1,28 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🍆 Nasubiman Portfolio
 
-## Getting Started
+Nasubimanの個人ポートフォリオサイトです。  
+学歴・スキル・コンペティション実績・制作物などをまとめて紹介しています。
 
-First, run the development server:
+## ✨ 主な機能
+
+- **About** — 自己紹介、所属研究室・部活動、GitHubリンク
+- **Resume** — 学歴（京都工芸繊維大学）のタイムライン表示
+- **Skills** — 習得している技術スタック一覧（Python, C++, TypeScript, Go など）
+- **My Work** — コンペティション実績（Kaggle 🥈 / Nishika 🥇 / SIGNATE 🥉 / AtCoder）
+- **Products** — 制作物の詳細紹介（ナス葉病気検知モデル など）
+
+## 🛠️ 技術スタック
+
+| カテゴリ | 技術 |
+| --- | --- |
+| フレームワーク | [Next.js](https://nextjs.org/) (App Router) |
+| 言語 | TypeScript |
+| スタイリング | [Tailwind CSS](https://tailwindcss.com/) v4 |
+| ホスティング | [Vercel](https://vercel.com/) |
+
+## 🚀 ローカルで動かす
+
+開発サーバーを起動するには、以下のコマンドを実行してください。
 
 ```bash
 npm run dev
@@ -14,23 +34,24 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+ブラウザで [http://localhost:3000](http://localhost:3000) を開くとサイトが表示されます。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+`app/page.tsx` を編集すると、ページがリアルタイムで自動更新されます。
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📁 ディレクトリ構成
 
-## Learn More
+```
+.
+├── app/
+│   ├── globals.css      # グローバルCSS（Tailwind設定含む）
+│   ├── layout.tsx       # 全ページ共通のレイアウト
+│   └── page.tsx         # メインのポートフォリオページ
+├── public/              # 静的ファイル（画像など）
+├── next.config.ts       # Next.js設定
+├── package.json
+└── tsconfig.json
+```
 
-To learn more about Next.js, take a look at the following resources:
+## 📝 ライセンス
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+© 2025 Nasubiman. All Rights Reserved.
