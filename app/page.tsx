@@ -313,6 +313,84 @@ export default function Portfolio() {
                 </div>
               </div>
             </div>
+
+            {/* salmon-ai */}
+            <div className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+              {/* Project Header */}
+              <div className="bg-gradient-to-r from-teal-500 to-emerald-600 px-8 py-8 relative">
+                <div className="absolute top-4 right-4 bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full backdrop-blur-sm border border-white/30">
+                  🤝 共同制作
+                </div>
+                <div className="flex items-center gap-3 mb-2">
+                  <span className="text-3xl">🐟</span>
+                  <h2 className="text-2xl font-bold text-white">salmon-ai</h2>
+                </div>
+                <p className="text-teal-50 text-sm">タスク管理、タイムブロッキング、進捗状況の可視化を備えたAI駆動アプリ</p>
+                <div className="flex flex-wrap gap-4 mt-4">
+                  <a
+                    href="https://salmon-ai.vercel.app"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center px-4 py-2 bg-white text-teal-700 hover:bg-teal-50 text-sm font-bold rounded-lg shadow-sm transition-colors"
+                  >
+                    Webサイトを開く &rarr;
+                  </a>
+                  <a
+                    href="https://github.com/KinuGra/salmon-ai"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center px-4 py-2 bg-white/20 hover:bg-white/30 text-white text-sm font-medium rounded-lg backdrop-blur-sm transition-colors"
+                  >
+                    GitHub で見る &rarr;
+                  </a>
+                </div>
+              </div>
+
+              {/* Project Details */}
+              <div className="p-8 space-y-8">
+                {/* Tech Stack */}
+                <div>
+                  <h3 className="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
+                    <span className="text-xl">🛠️</span> 使用技術
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="bg-blue-50 border border-blue-100 rounded-xl p-4 text-center">
+                      <p className="font-bold text-blue-800 text-sm">Next.js (TypeScript)</p>
+                      <p className="text-xs text-gray-500 mt-1">Frontend</p>
+                    </div>
+                    <div className="bg-cyan-50 border border-cyan-100 rounded-xl p-4 text-center">
+                      <p className="font-bold text-cyan-800 text-sm">Go</p>
+                      <p className="text-xs text-gray-500 mt-1">Backend</p>
+                    </div>
+                    <div className="bg-yellow-50 border border-yellow-100 rounded-xl p-4 text-center">
+                      <p className="font-bold text-yellow-800 text-sm">Python</p>
+                      <p className="text-xs text-gray-500 mt-1">AI</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Features */}
+                <div>
+                  <h3 className="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
+                    <span className="text-xl">✨</span> 主な機能
+                  </h3>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    <div className="bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-center">
+                      <p className="text-sm font-medium text-gray-800">✅ タスクリスト</p>
+                    </div>
+                    <div className="bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-center">
+                      <p className="text-sm font-medium text-gray-800">⏳ タイムブロック</p>
+                    </div>
+                    <div className="bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-center">
+                      <p className="text-sm font-medium text-gray-800">📊 統計・サマリー</p>
+                    </div>
+                    <div className="bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-center">
+                      <p className="text-sm font-medium text-gray-800">🤖 AIサポート</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </section>
         )}
 
