@@ -391,6 +391,73 @@ export default function Portfolio() {
                 </div>
               </div>
             </div>
+
+            {/* SlayTheSpire2Vote */}
+            <div className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+              {/* Project Header */}
+              <div className="bg-gradient-to-r from-red-800 to-orange-700 px-8 py-8">
+                <div className="flex items-center gap-3 mb-2">
+                  <span className="text-3xl">⚔️</span>
+                  <h2 className="text-2xl font-bold text-white">Slay the Spire 2 カード強さ投票サイト</h2>
+                </div>
+                <p className="text-orange-100 text-sm">カードを S / A / B / C / D の5段階で評価・投票し、みんなの評価をリアルタイムで確認できるサイト</p>
+                <div className="flex flex-wrap gap-4 mt-4">
+                  <a
+                    href="https://slaythespire2vote.vercel.app"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center px-4 py-2 bg-white text-red-800 hover:bg-orange-50 text-sm font-bold rounded-lg shadow-sm transition-colors"
+                  >
+                    Webサイトを開く &rarr;
+                  </a>
+                  <a
+                    href="https://github.com/Nasubiman/SlayTheSpire2Vote"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center px-4 py-2 bg-white/20 hover:bg-white/30 text-white text-sm font-medium rounded-lg backdrop-blur-sm transition-colors"
+                  >
+                    GitHub で見る &rarr;
+                  </a>
+                </div>
+              </div>
+
+              {/* Project Details */}
+              <div className="p-8 space-y-8">
+                {/* Tech tags */}
+                <div className="flex gap-2 flex-wrap">
+                  <span className="bg-blue-50 text-blue-700 border border-blue-200 text-xs font-bold px-3 py-1 rounded-full">TypeScript 97.7%</span>
+                  <span className="bg-gray-100 text-gray-600 border border-gray-200 text-xs font-bold px-3 py-1 rounded-full">Next.js</span>
+                  <span className="bg-gray-100 text-gray-600 border border-gray-200 text-xs font-bold px-3 py-1 rounded-full">Vercel</span>
+                </div>
+
+                {/* Features */}
+                <div>
+                  <h3 className="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
+                    <span className="text-xl">✨</span> 主な機能
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    {[
+                      { icon: "🃏", text: "キャラクター別カード一覧（6種）" },
+                      { icon: "🔍", text: "カードタイプでフィルタリング" },
+                      { icon: "🖼️", text: "強化前/後の画像切替" },
+                      { icon: "🗳️", text: "S〜D の5段階投票" },
+                      { icon: "📊", text: "投票結果をリアルタイム表示（棒グラフ）" },
+                      { icon: "🚫", text: "同一IPからの重複投票防止" },
+                    ].map(({ icon, text }) => (
+                      <div key={text} className="flex items-center gap-3 bg-gray-50 border border-gray-200 rounded-lg px-4 py-3">
+                        <span className="text-lg">{icon}</span>
+                        <p className="text-sm font-medium text-gray-800">{text}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Disclaimer */}
+                <div className="bg-orange-50 border border-orange-100 rounded-xl p-4 text-xs text-gray-500 leading-relaxed">
+                  ⚠️ カード画像・カード名は <a href="https://store.steampowered.com/app/1868140/Slay_the_Spire_2/" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-700">Slay the Spire 2</a> (MegaCrit) の著作物です。本サイトは非公式のファンサイトであり、MegaCrit とは一切関係ありません。
+                </div>
+              </div>
+            </div>
           </section>
         )}
 
