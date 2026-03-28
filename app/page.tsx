@@ -69,7 +69,7 @@ export default function Portfolio() {
             <section id="resume" className="space-y-12">
               <div className="border-t border-gray-200 pt-12">
                 <h2 className="text-3xl font-bold tracking-tight text-gray-900 mb-8">Resume</h2>
-                <div>
+                <div className="grid md:grid-cols-2 gap-12">
                   <div>
                     <h3 className="text-xl font-semibold mb-6 flex items-center text-gray-800">
                       <span className="bg-blue-100 text-blue-700 p-2 rounded-lg mr-3 shadow-sm">🎓</span>
@@ -87,6 +87,21 @@ export default function Portfolio() {
                         <p className="text-sm text-gray-500 font-medium">2022年4月 〜 2026年3月</p>
                         <p className="font-medium text-gray-900 mt-1">京都工芸繊維大学 学士課程</p>
                         <p className="text-gray-600 text-sm">工芸科学科 / 設計工学域 / 情報工学課程</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h3 className="text-xl font-semibold mb-6 flex items-center text-gray-800">
+                      <span className="bg-blue-100 text-blue-700 p-2 rounded-lg mr-3 shadow-sm">💼</span>
+                      Work
+                    </h3>
+                    <div className="space-y-6">
+                      <div className="relative pl-6 border-l-2 border-gray-200">
+                        <span className="absolute -left-[9px] top-1 h-4 w-4 rounded-full bg-blue-500 border-4 border-white"></span>
+                        <p className="text-sm text-gray-500 font-medium">2026年3月 〜 現在</p>
+                        <p className="font-medium text-gray-900 mt-1">Baseconnect株式会社</p>
+                        <p className="text-gray-600 text-sm">インターン</p>
                       </div>
                     </div>
                   </div>
