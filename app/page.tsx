@@ -46,7 +46,7 @@ export default function Portfolio() {
                   <span className="text-blue-600">Student / Engineer.</span>
                 </h1>
                 <p className="text-lg text-gray-600 leading-relaxed max-w-2xl">
-                  京都工芸繊維大学B4。機械学習、最適化アルゴリズム、競技プログラミングなど幅広い分野に興味があります。<br />
+                  京都工芸繊維大学大学院M1。機械学習、最適化アルゴリズム、競技プログラミングなど幅広い分野に興味があります。<br />
                   各種コンペティションに積極的に参加し、実践的な課題解決に取り組んでいます。
                 </p>
               </div>
