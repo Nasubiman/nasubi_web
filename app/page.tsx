@@ -7,9 +7,9 @@ const skills = [
   { name: 'Python',     bg: 'bg-yellow-50', border: 'border-yellow-200', text: 'text-yellow-800' },
   { name: 'C++',        bg: 'bg-blue-50',   border: 'border-blue-200',   text: 'text-blue-800'   },
   { name: 'C#',         bg: 'bg-purple-50', border: 'border-purple-200', text: 'text-purple-800' },
-  { name: 'Git',        bg: 'bg-orange-50', border: 'border-orange-200', text: 'text-orange-800' },
   { name: 'TypeScript', bg: 'bg-sky-50',    border: 'border-sky-200',    text: 'text-sky-800'    },
   { name: 'Go',         bg: 'bg-cyan-50',   border: 'border-cyan-200',   text: 'text-cyan-800'   },
+  { name: 'Linux',      bg: 'bg-orange-50', border: 'border-orange-200', text: 'text-orange-800' },
 ];
 
 const GitHubIcon = () => (
