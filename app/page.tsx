@@ -136,7 +136,7 @@ export default function Portfolio() {
                   <div className="space-y-6">
                     <div className="relative pl-6 border-l-2 border-blue-200">
                       <span className="absolute -left-[9px] top-1.5 h-4 w-4 rounded-full bg-blue-500 border-4 border-white shadow-sm"></span>
-                      <p className="text-xs text-blue-600 font-semibold uppercase tracking-wide">2026 — 2028（予定）</p>
+                      <p className="text-xs text-blue-600 font-semibold uppercase tracking-wide">2026 — 2028</p>
                       <p className="font-semibold text-gray-900 mt-1">京都工芸繊維大学大学院 博士前期課程</p>
                       <p className="text-gray-500 text-sm mt-0.5">工芸科学科 / 設計工学域 / 情報工学専攻</p>
                     </div>
@@ -158,7 +158,7 @@ export default function Portfolio() {
                   <div className="space-y-6">
                     <div className="relative pl-6 border-l-2 border-blue-200">
                       <span className="absolute -left-[9px] top-1.5 h-4 w-4 rounded-full bg-blue-500 border-4 border-white shadow-sm"></span>
-                      <p className="text-xs text-blue-600 font-semibold uppercase tracking-wide">2026年3月 — 現在</p>
+                      <p className="text-xs text-blue-600 font-semibold uppercase tracking-wide">2026年3月 — 2026年5月</p>
                       <p className="font-semibold text-gray-900 mt-1">Baseconnect株式会社</p>
                       <p className="text-gray-500 text-sm mt-0.5">インターン</p>
                     </div>
@@ -235,16 +235,14 @@ export default function Portfolio() {
                 {/* Nishika */}
                 <div className="bg-white border border-gray-200 border-t-4 border-t-yellow-400 rounded-2xl p-6 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200">
                   <h3 className="text-xl font-bold text-gray-900 mb-1">Nishika</h3>
-                  <p className="text-xs text-gray-400 font-medium uppercase tracking-wide mb-4">コンペティションプラットフォーム</p>
-                  <div className="mb-5 bg-gray-50 rounded-xl p-4 space-y-2">
+                  <p className="text-xs text-gray-400 font-medium uppercase tracking-wide mb-1">コンペティションプラットフォーム</p>
+                  <p className="text-xs text-red-500 font-medium mb-4">※現在はサービスを終了しています</p>
+                  <div className="bg-gray-50 rounded-xl p-4 space-y-2">
                     <p className="text-sm font-medium text-gray-800">大手グローバル小売メーカーの商品PR文生成（LLM）</p>
                     <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-yellow-50 text-yellow-700 border border-yellow-200">
                       🥇 Gold Medal
                     </span>
                   </div>
-                  <a href="https://competition.nishika.com/users/bjGVBPLoJq7Nzla5" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 text-sm font-semibold flex items-center gap-1 transition-colors">
-                    View Profile →
-                  </a>
                 </div>
 
               </div>
