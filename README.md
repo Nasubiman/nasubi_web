@@ -8,8 +8,14 @@ Nasubimanの個人ポートフォリオサイトです。
 - **About** — 自己紹介、所属研究室・部活動、GitHubリンク
 - **Resume** — 学歴（京都工芸繊維大学）のタイムライン表示
 - **Skills** — 習得している技術スタック一覧（Python, C++, TypeScript, Go など）
-- **My Work** — コンペティション実績（Kaggle 🥈 / Nishika 🥇 / SIGNATE 🥉 / AtCoder）
+- **My Work** — コンペティション実績（Kaggle Competitions Expert / Kaggle 銀メダル2件 / Nishika 金 / SIGNATE 銅 / AtCoder）
 - **Products** — 制作物の詳細紹介（ナス葉病気検知モデル など）
+
+### Kaggle実績
+
+- **The 2026 NeuroGolf Championship** — 3,061人中138位、銀メダル
+- **Santa 2025 - Christmas Tree Packing Challenge** — 3,357チーム中65位、銀メダル
+- 上記実績により **Kaggle Competitions Expert** に到達
 
 ## 🛠️ 技術スタック
 
