@@ -20,6 +20,12 @@ const competitions = [
   },
   {
     name: "Kaggle",
+    description: "The 2026 NeuroGolf Championship — Silver Medal / Rank 138 of 3,061",
+    result: "Kaggle Competitions Expert",
+    href: "https://www.kaggle.com/yousukenakamura",
+  },
+  {
+    name: "Kaggle",
     description: "Santa 2025 - Christmas Tree Packing Challenge",
     result: "Silver Medal / Rank 65 of 3,357 teams",
     href: "https://www.kaggle.com/yousukenakamura",
@@ -132,7 +138,7 @@ export default function Portfolio() {
               <p className="mt-3 text-base text-neutral-500">Student / Engineer</p>
               <p className="mt-8 max-w-2xl text-base leading-8 text-neutral-700">
                 京都工芸繊維大学大学院M1。機械学習、最適化アルゴリズム、競技プログラミングなど幅広い分野に興味があります。
-                各種コンペティションに参加し、実践的な課題解決に取り組んでいます。
+                Kaggle Competitions Expertとして、各種コンペティションに参加し、実践的な課題解決に取り組んでいます。
               </p>
               <p className="mt-3 text-sm text-neutral-500">京都工芸繊維大学 情報工学専攻</p>
               <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3">
@@ -187,8 +193,8 @@ export default function Portfolio() {
             <section>
               <SectionHeading>My Work</SectionHeading>
               <div className="divide-y divide-neutral-200 border-y border-neutral-200">
-                {competitions.map((competition) => (
-                  <article key={competition.name} className="grid gap-3 py-6 sm:grid-cols-[9rem_1fr]">
+                {competitions.map((competition, index) => (
+                  <article key={`${competition.name}-${index}`} className="grid gap-3 py-6 sm:grid-cols-[9rem_1fr]">
                     <div>
                       <h3 className="font-semibold">{competition.name}</h3>
                       {competition.href && (
