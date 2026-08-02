@@ -1,62 +1,121 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import Link from "next/link";
 
-const skills = [
-  { name: 'Python',     bg: 'bg-yellow-50', border: 'border-yellow-200', text: 'text-yellow-800' },
-  { name: 'C++',        bg: 'bg-blue-50',   border: 'border-blue-200',   text: 'text-blue-800'   },
-  { name: 'C#',         bg: 'bg-purple-50', border: 'border-purple-200', text: 'text-purple-800' },
-  { name: 'TypeScript', bg: 'bg-sky-50',    border: 'border-sky-200',    text: 'text-sky-800'    },
-  { name: 'Go',         bg: 'bg-cyan-50',   border: 'border-cyan-200',   text: 'text-cyan-800'   },
-  { name: 'Linux',      bg: 'bg-orange-50', border: 'border-orange-200', text: 'text-orange-800' },
+const skills = ["Python", "C++", "C#", "TypeScript", "Go", "Linux"];
+
+const competitions = [
+  {
+    name: "SIGNATE",
+    description: "第2回 国土交通省 地理空間情報データチャレンジ",
+    result: "Bronze Medal",
+    href: "https://user.competition.signate.jp/en/user/?user=75da792abc434981b8fd3a986a646510",
+  },
+  {
+    name: "AtCoder",
+    description: "競技プログラミングでのアルゴリズム構築",
+    result: "",
+    href: "https://atcoder.jp/users/NASUBIMAN",
+  },
+  {
+    name: "Kaggle",
+    description: "Santa 2025 - Christmas Tree Packing Challenge",
+    result: "Silver Medal / Rank 65 of 3,357 teams",
+    href: "https://www.kaggle.com/yousukenakamura",
+  },
+  {
+    name: "Nishika",
+    description: "大手グローバル小売メーカーの商品PR文生成（LLM）",
+    result: "Gold Medal / サービス終了",
+  },
+];
+
+const trainingTechniques = [
+  "Data Augmentation",
+  "Label Smoothing (0.1)",
+  "Cosine Annealing LR",
+  "Weight Decay (0.05)",
+  "RandomErasing",
+  "ColorJitter",
+];
+
+const leafClasses = [
+  ["0", "Healthy Leaf（健康な葉）"],
+  ["1", "Insect Pest Disease（害虫）"],
+  ["2", "Leaf Spot Disease（斑点病）"],
+  ["3", "Mosaic Virus Disease（モザイク病）"],
+  ["4", "Small Leaf Disease（小葉病）"],
+  ["5", "White Mold Disease（白絹病）"],
+  ["6", "Wilt Disease（萎凋病）"],
 ];
 
 const GitHubIcon = () => (
-  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+  <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
     <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.92.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
   </svg>
 );
 
-const SectionHeading = ({ children }: { children: React.ReactNode }) => (
-  <h2 className="text-3xl font-bold tracking-tight text-gray-900 mb-8 flex items-center gap-3">
-    <span className="w-1 h-8 bg-blue-600 rounded-full shrink-0"></span>
-    {children}
-  </h2>
-);
+function SectionHeading({ children }: { children: ReactNode }) {
+  return (
+    <h2 className="mb-8 border-b border-neutral-300 pb-3 text-sm font-semibold uppercase tracking-[0.16em] text-neutral-500">
+      {children}
+    </h2>
+  );
+}
+
+function ExternalLink({ href, children }: { href: string; children: ReactNode }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex items-center gap-1.5 border-b border-neutral-400 pb-0.5 text-sm text-neutral-700 transition-colors hover:border-neutral-900 hover:text-neutral-950"
+    >
+      {children}
+    </a>
+  );
+}
+
+function ProductSection({ title, children }: { title: string; children: ReactNode }) {
+  return (
+    <section className="border-t border-neutral-200 pt-6">
+      <h3 className="mb-4 text-base font-semibold text-neutral-900">{title}</h3>
+      {children}
+    </section>
+  );
+}
 
 export default function Portfolio() {
   const [activeTab, setActiveTab] = useState<"about" | "products">("about");
-  const [fading, setFading] = useState(false);
-
-  const switchTab = (tab: "about" | "products") => {
-    if (tab === activeTab) return;
-    setFading(true);
-    setTimeout(() => {
-      setActiveTab(tab);
-      setFading(false);
-    }, 150);
-  };
 
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-900 font-sans selection:bg-blue-100 selection:text-blue-900">
-
-      {/* Header Navigation */}
-      <header className="fixed top-0 w-full bg-white/80 backdrop-blur-md border-b border-gray-200 z-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <Link href="/" className="text-xl font-bold tracking-tight hover:text-blue-600 transition-colors">
+    <div className="min-h-screen bg-[#fafaf8] text-neutral-900 selection:bg-neutral-200">
+      <header className="sticky top-0 z-50 border-b border-neutral-300 bg-[#fafaf8]">
+        <div className="mx-auto flex h-16 max-w-3xl items-center justify-between px-5 sm:px-8">
+          <Link href="/" className="text-base font-semibold tracking-tight">
             Nasubiman
           </Link>
-          <nav className="flex space-x-1 text-sm font-medium text-gray-600 border border-gray-200 rounded-full px-1.5 py-1 shadow-sm bg-white">
+          <nav className="flex gap-6 text-sm" aria-label="Primary navigation">
             <button
-              onClick={() => switchTab("about")}
-              className={`px-4 py-1 rounded-full transition-all duration-200 ${activeTab === "about" ? "bg-blue-600 text-white shadow-sm" : "hover:text-blue-600"}`}
+              type="button"
+              onClick={() => setActiveTab("about")}
+              className={`border-b py-1 transition-colors ${
+                activeTab === "about"
+                  ? "border-neutral-900 text-neutral-900"
+                  : "border-transparent text-neutral-500 hover:text-neutral-900"
+              }`}
             >
               About
             </button>
             <button
-              onClick={() => switchTab("products")}
-              className={`px-4 py-1 rounded-full transition-all duration-200 ${activeTab === "products" ? "bg-blue-600 text-white shadow-sm" : "hover:text-blue-600"}`}
+              type="button"
+              onClick={() => setActiveTab("products")}
+              className={`border-b py-1 transition-colors ${
+                activeTab === "products"
+                  ? "border-neutral-900 text-neutral-900"
+                  : "border-transparent text-neutral-500 hover:text-neutral-900"
+              }`}
             >
               Products
             </button>
@@ -64,506 +123,296 @@ export default function Portfolio() {
         </div>
       </header>
 
-      {/* Main Content */}
-      <main
-        className={`max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16 space-y-24 transition-opacity duration-150 ${fading ? "opacity-0" : "opacity-100"}`}
-      >
-
-        {/* ===== About Tab ===== */}
+      <main className="mx-auto max-w-3xl px-5 py-16 sm:px-8 sm:py-20">
         {activeTab === "about" && (
-          <>
-            {/* Intro Section */}
-            <section id="about" className="space-y-8">
-              <div className="space-y-5">
-                {/* Status badge */}
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-50 border border-blue-100 rounded-full text-blue-700 text-xs font-semibold tracking-wide">
-                  <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span>
-                  M1 @ 京都工芸繊維大学
-                </div>
-
-                <h1 className="text-5xl font-extrabold tracking-tight text-gray-900 sm:text-6xl leading-tight">
-                  Hello, I&apos;m<br />
-                  <span className="bg-gradient-to-r from-blue-600 to-indigo-500 bg-clip-text text-transparent">
-                    Nasubiman.
-                  </span>
-                </h1>
-                <p className="text-xl font-medium text-gray-400 tracking-tight">Student / Engineer</p>
-                <p className="text-lg text-gray-600 leading-relaxed max-w-2xl">
-                  京都工芸繊維大学大学院M1。機械学習、最適化アルゴリズム、競技プログラミングなど幅広い分野に興味があります。<br />
-                  各種コンペティションに積極的に参加し、実践的な課題解決に取り組んでいます。
-                </p>
-              </div>
-
-              {/* Links */}
-              <div className="flex flex-wrap gap-3">
-                <a
-                  href="https://www.soc.is.kit.ac.jp/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2.5 bg-gray-900 text-white hover:bg-gray-700 transition-all duration-200 text-sm font-medium rounded-xl shadow-sm hover:shadow-md hover:-translate-y-0.5"
-                >
-                  🎓 京都工芸繊維大学 馬研究室
-                </a>
-                <a
-                  href="https://www.fortefibre.net/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2.5 border border-gray-200 bg-white text-gray-700 hover:border-gray-300 hover:bg-gray-50 transition-all duration-200 text-sm font-medium rounded-xl shadow-sm hover:-translate-y-0.5"
-                >
-                  🏋️ ForteFibre
-                </a>
-                <a
-                  href="https://github.com/Nasubiman"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2.5 border border-blue-200 bg-blue-50 text-blue-700 hover:bg-blue-100 hover:border-blue-300 transition-all duration-200 text-sm font-medium rounded-xl shadow-sm hover:-translate-y-0.5"
-                >
+          <div className="space-y-20">
+            <section>
+              <p className="mb-5 text-sm text-neutral-500">Portfolio</p>
+              <h1 className="text-4xl font-semibold tracking-[-0.03em] sm:text-5xl">Nasubiman</h1>
+              <p className="mt-3 text-base text-neutral-500">Student / Engineer</p>
+              <p className="mt-8 max-w-2xl text-base leading-8 text-neutral-700">
+                京都工芸繊維大学大学院M1。機械学習、最適化アルゴリズム、競技プログラミングなど幅広い分野に興味があります。
+                各種コンペティションに参加し、実践的な課題解決に取り組んでいます。
+              </p>
+              <p className="mt-3 text-sm text-neutral-500">京都工芸繊維大学 情報工学専攻</p>
+              <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3">
+                <ExternalLink href="https://www.soc.is.kit.ac.jp/">馬研究室</ExternalLink>
+                <ExternalLink href="https://www.fortefibre.net/">ForteFibre</ExternalLink>
+                <ExternalLink href="https://github.com/Nasubiman">
                   <GitHubIcon /> GitHub
-                </a>
+                </ExternalLink>
               </div>
             </section>
 
-            {/* Resume Section */}
-            <section id="resume" className="border-t border-gray-200 pt-12">
+            <section>
               <SectionHeading>Resume</SectionHeading>
-              <div className="grid md:grid-cols-2 gap-12">
-                {/* Education */}
+              <div className="grid gap-12 md:grid-cols-2">
                 <div>
-                  <h3 className="text-xl font-semibold mb-6 flex items-center text-gray-800">
-                    <span className="bg-blue-100 text-blue-700 p-2 rounded-lg mr-3 shadow-sm">🎓</span>
-                    Education
-                  </h3>
-                  <div className="space-y-6">
-                    <div className="relative pl-6 border-l-2 border-blue-200">
-                      <span className="absolute -left-[9px] top-1.5 h-4 w-4 rounded-full bg-blue-500 border-4 border-white shadow-sm"></span>
-                      <p className="text-xs text-blue-600 font-semibold uppercase tracking-wide">2026 — 2028</p>
-                      <p className="font-semibold text-gray-900 mt-1">京都工芸繊維大学大学院 博士前期課程</p>
-                      <p className="text-gray-500 text-sm mt-0.5">工芸科学科 / 設計工学域 / 情報工学専攻</p>
+                  <h3 className="mb-5 text-base font-semibold">Education</h3>
+                  <div className="space-y-7">
+                    <div>
+                      <p className="text-sm text-neutral-500">2026 — 2028</p>
+                      <p className="mt-1 font-medium">京都工芸繊維大学大学院 博士前期課程</p>
+                      <p className="mt-1 text-sm leading-6 text-neutral-600">工芸科学科 / 設計工学域 / 情報工学専攻</p>
                     </div>
-                    <div className="relative pl-6 border-l-2 border-gray-200">
-                      <span className="absolute -left-[9px] top-1.5 h-4 w-4 rounded-full bg-gray-300 border-4 border-white"></span>
-                      <p className="text-xs text-gray-400 font-semibold uppercase tracking-wide">2022 — 2026</p>
-                      <p className="font-semibold text-gray-900 mt-1">京都工芸繊維大学 学士課程</p>
-                      <p className="text-gray-500 text-sm mt-0.5">工芸科学科 / 設計工学域 / 情報工学課程</p>
+                    <div>
+                      <p className="text-sm text-neutral-500">2022 — 2026</p>
+                      <p className="mt-1 font-medium">京都工芸繊維大学 学士課程</p>
+                      <p className="mt-1 text-sm leading-6 text-neutral-600">工芸科学科 / 設計工学域 / 情報工学課程</p>
                     </div>
                   </div>
                 </div>
-
-                {/* Work */}
                 <div>
-                  <h3 className="text-xl font-semibold mb-6 flex items-center text-gray-800">
-                    <span className="bg-blue-100 text-blue-700 p-2 rounded-lg mr-3 shadow-sm">💼</span>
-                    Work
-                  </h3>
-                  <div className="space-y-6">
-                    <div className="relative pl-6 border-l-2 border-blue-200">
-                      <span className="absolute -left-[9px] top-1.5 h-4 w-4 rounded-full bg-blue-500 border-4 border-white shadow-sm"></span>
-                      <p className="text-xs text-blue-600 font-semibold uppercase tracking-wide">2026年3月 — 2026年5月</p>
-                      <p className="font-semibold text-gray-900 mt-1">Baseconnect株式会社</p>
-                      <p className="text-gray-500 text-sm mt-0.5">インターン</p>
-                    </div>
+                  <h3 className="mb-5 text-base font-semibold">Work</h3>
+                  <div>
+                    <p className="text-sm text-neutral-500">2026年3月 — 2026年5月</p>
+                    <p className="mt-1 font-medium">Baseconnect株式会社</p>
+                    <p className="mt-1 text-sm text-neutral-600">インターン</p>
                   </div>
                 </div>
               </div>
             </section>
 
-            {/* Skills Section */}
-            <section id="skills" className="border-t border-gray-200 pt-16">
+            <section>
               <SectionHeading>Skills</SectionHeading>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                {skills.map(skill => (
-                  <div
-                    key={skill.name}
-                    className={`${skill.bg} ${skill.border} border rounded-xl p-4 text-center hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 cursor-default`}
-                  >
-                    <p className={`font-semibold ${skill.text}`}>{skill.name}</p>
-                  </div>
+              <ul className="grid grid-cols-2 gap-x-8 gap-y-3 text-sm sm:grid-cols-3">
+                {skills.map((skill) => (
+                  <li key={skill} className="border-b border-neutral-200 pb-2 text-neutral-700">
+                    {skill}
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            <section>
+              <SectionHeading>My Work</SectionHeading>
+              <div className="divide-y divide-neutral-200 border-y border-neutral-200">
+                {competitions.map((competition) => (
+                  <article key={competition.name} className="grid gap-3 py-6 sm:grid-cols-[9rem_1fr]">
+                    <div>
+                      <h3 className="font-semibold">{competition.name}</h3>
+                      {competition.href && (
+                        <a
+                          href={competition.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="mt-2 inline-block text-xs text-neutral-500 underline decoration-neutral-300 underline-offset-4 hover:text-neutral-900"
+                        >
+                          Profile
+                        </a>
+                      )}
+                    </div>
+                    <div>
+                      <p className="text-sm leading-6 text-neutral-700">{competition.description}</p>
+                      {competition.result && <p className="mt-2 text-sm font-medium text-neutral-900">{competition.result}</p>}
+                    </div>
+                  </article>
                 ))}
               </div>
             </section>
-
-            {/* My Work Section */}
-            <section id="my-work" className="border-t border-gray-200 pt-16 pb-8">
-              <SectionHeading>My Work</SectionHeading>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-                {/* SIGNATE */}
-                <div className="bg-white border border-gray-200 border-t-4 border-t-amber-500 rounded-2xl p-6 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200">
-                  <h3 className="text-xl font-bold text-gray-900 mb-1">SIGNATE</h3>
-                  <p className="text-xs text-gray-400 font-medium uppercase tracking-wide mb-4">コンペティションプラットフォーム</p>
-                  <div className="mb-5 bg-gray-50 rounded-xl p-4 space-y-2">
-                    <p className="text-sm font-medium text-gray-800">第2回 国土交通省 地理空間情報データチャレンジ</p>
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200">
-                      🥉 Bronze Medal
-                    </span>
-                  </div>
-                  <a href="https://user.competition.signate.jp/en/user/?user=75da792abc434981b8fd3a986a646510" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 text-sm font-semibold flex items-center gap-1 transition-colors">
-                    View Profile →
-                  </a>
-                </div>
-
-                {/* AtCoder */}
-                <div className="bg-white border border-gray-200 border-t-4 border-t-gray-500 rounded-2xl p-6 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200">
-                  <h3 className="text-xl font-bold text-gray-900 mb-1">AtCoder</h3>
-                  <p className="text-xs text-gray-400 font-medium uppercase tracking-wide mb-4">競技プログラミングサイト</p>
-                  <div className="mb-5 bg-gray-50 rounded-xl p-4">
-                    <p className="text-sm font-medium text-gray-800">競技プログラミングでのアルゴリズム構築</p>
-                  </div>
-                  <a href="https://atcoder.jp/users/NASUBIMAN" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 text-sm font-semibold flex items-center gap-1 transition-colors">
-                    View Profile →
-                  </a>
-                </div>
-
-                {/* Kaggle */}
-                <div className="bg-white border border-gray-200 border-t-4 border-t-blue-500 rounded-2xl p-6 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200">
-                  <h3 className="text-xl font-bold text-gray-900 mb-1">Kaggle</h3>
-                  <p className="text-xs text-gray-400 font-medium uppercase tracking-wide mb-4">コンペティションプラットフォーム</p>
-                  <div className="mb-5 bg-gray-50 rounded-xl p-4 space-y-2">
-                    <p className="text-sm font-medium text-gray-800">Santa 2025 - Christmas Tree Packing Challenge</p>
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-gray-100 text-gray-600 border border-gray-200">
-                        🥈 Silver Medal
-                      </span>
-                      <span className="text-xs text-gray-400 font-medium">Rank 65 / 3,357 Teams</span>
-                    </div>
-                  </div>
-                  <a href="https://www.kaggle.com/yousukenakamura" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 text-sm font-semibold flex items-center gap-1 transition-colors">
-                    View Profile →
-                  </a>
-                </div>
-
-                {/* Nishika */}
-                <div className="bg-white border border-gray-200 border-t-4 border-t-yellow-400 rounded-2xl p-6 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200">
-                  <h3 className="text-xl font-bold text-gray-900 mb-1">Nishika</h3>
-                  <p className="text-xs text-gray-400 font-medium uppercase tracking-wide mb-1">コンペティションプラットフォーム</p>
-                  <p className="text-xs text-red-500 font-medium mb-4">※現在はサービスを終了しています</p>
-                  <div className="bg-gray-50 rounded-xl p-4 space-y-2">
-                    <p className="text-sm font-medium text-gray-800">大手グローバル小売メーカーの商品PR文生成（LLM）</p>
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-yellow-50 text-yellow-700 border border-yellow-200">
-                      🥇 Gold Medal
-                    </span>
-                  </div>
-                </div>
-
-              </div>
-            </section>
-          </>
+          </div>
         )}
 
-        {/* ===== Products Tab ===== */}
         {activeTab === "products" && (
-          <section id="products" className="space-y-12">
-            <div>
-              <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl mb-2">
-                Products
-              </h1>
-              <p className="text-lg text-gray-400">開発したプロジェクト</p>
+          <div>
+            <div className="mb-16">
+              <p className="mb-4 text-sm text-neutral-500">Selected projects</p>
+              <h1 className="text-4xl font-semibold tracking-[-0.03em] sm:text-5xl">Products</h1>
             </div>
 
-            {/* Eggplant Leaf Classification */}
-            <div className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
-              <div className="bg-gradient-to-r from-purple-600 to-indigo-600 px-8 py-8">
-                <div className="flex items-center gap-3 mb-2">
-                  <span className="text-3xl">🍆</span>
-                  <h2 className="text-2xl font-bold text-white">Eggplant Leaf Classification</h2>
-                </div>
-                <p className="text-purple-100 text-sm">ナスの葉っぱから病気を検知する深層学習モデル</p>
-                <a
-                  href="https://github.com/Nasubiman/eggplant_leaf_classification"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 mt-4 px-4 py-2 bg-white/20 hover:bg-white/30 text-white text-sm font-medium rounded-lg backdrop-blur-sm transition-colors"
-                >
-                  <GitHubIcon /> GitHub で見る →
-                </a>
-              </div>
-
-              <div className="p-8 space-y-8">
-                {/* Story */}
-                <div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
-                    <span className="text-xl">📖</span> ストーリー
-                  </h3>
-                  <div className="bg-gray-50 border border-gray-100 rounded-xl p-5 text-sm text-gray-700 leading-relaxed italic">
-                    「20XX年、世界は致死性の植物ウイルスにより崩壊した。かつて青々と茂っていた畑は荒野と化し、もはや我々にナスすべは無く、安全に根を張れる場所は防衛都市・那須のみとなった。
-                    あなたは、この都市のメインゲートで検問所の監視官を務めている。押し寄せる避難民の中から、健康な個体とウイルスに侵された不健康な個体を正確に仕分け、都市内部への侵入を防ぐ。」
-                  </div>
-                </div>
-
-                {/* Model */}
-                <div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
-                    <span className="text-xl">🧠</span> モデル構成
-                  </h3>
-                  <p className="text-sm text-gray-600 mb-4">
-                    ImageNet 事前学習済みモデル3種の<strong>アンサンブル（Hard Voting）</strong>
+            <div className="space-y-20">
+              <article>
+                <header className="mb-8">
+                  <p className="mb-2 text-sm text-neutral-500">Machine Learning</p>
+                  <h2 className="text-2xl font-semibold tracking-tight">Eggplant Leaf Classification</h2>
+                  <p className="mt-3 max-w-2xl text-sm leading-7 text-neutral-600">
+                    ナスの葉から病気を検知する深層学習モデルです。
                   </p>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div className="bg-purple-50 border border-purple-100 rounded-xl p-4 text-center">
-                      <p className="font-bold text-purple-800 text-sm">ResNet-50</p>
-                      <p className="text-xs text-purple-500 mt-1">25M パラメータ</p>
-                      <p className="text-xs text-gray-500 mt-1">残差接続ベースの標準CNN</p>
-                    </div>
-                    <div className="bg-purple-50 border border-purple-100 rounded-xl p-4 text-center">
-                      <p className="font-bold text-purple-800 text-sm">DenseNet-201</p>
-                      <p className="text-xs text-purple-500 mt-1">20M パラメータ</p>
-                      <p className="text-xs text-gray-500 mt-1">全層の特徴を密に結合するCNN</p>
-                    </div>
-                    <div className="bg-purple-50 border border-purple-100 rounded-xl p-4 text-center">
-                      <p className="font-bold text-purple-800 text-sm">ConvNeXt-Base</p>
-                      <p className="text-xs text-purple-500 mt-1">89M パラメータ</p>
-                      <p className="text-xs text-gray-500 mt-1">Transformer知見で再設計されたモダンCNN</p>
-                    </div>
+                  <div className="mt-5">
+                    <ExternalLink href="https://github.com/Nasubiman/eggplant_leaf_classification">
+                      <GitHubIcon /> GitHub
+                    </ExternalLink>
                   </div>
-                </div>
+                </header>
 
-                {/* Dataset */}
-                <div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
-                    <span className="text-xl">📊</span> データセット
-                  </h3>
-                  <p className="text-sm text-gray-600 mb-3">画像数：<strong>1,400枚</strong>（Train: 980 / Val: 210 / Test: 210）</p>
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-sm border border-gray-200 rounded-lg overflow-hidden">
-                      <thead className="bg-gray-100">
-                        <tr>
-                          <th className="text-left px-4 py-2 text-gray-600 font-medium">ID</th>
-                          <th className="text-left px-4 py-2 text-gray-600 font-medium">クラス名</th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-gray-100">
-                        {[
-                          ["0", "Healthy Leaf（健康な葉）"],
-                          ["1", "Insect Pest Disease（害虫）"],
-                          ["2", "Leaf Spot Disease（斑点病）"],
-                          ["3", "Mosaic Virus Disease（モザイク病）"],
-                          ["4", "Small Leaf Disease（小葉病）"],
-                          ["5", "White Mold Disease（白絹病）"],
-                          ["6", "Wilt Disease（萎凋病）"],
-                        ].map(([id, name]) => (
-                          <tr key={id} className="hover:bg-gray-50 transition-colors">
-                            <td className="px-4 py-2 text-gray-500 font-mono">{id}</td>
-                            <td className="px-4 py-2 text-gray-800">{name}</td>
+                <div className="space-y-8">
+                  <ProductSection title="ストーリー">
+                    <blockquote className="border-l-2 border-neutral-300 pl-5 text-sm leading-7 text-neutral-600">
+                      「20XX年、世界は致死性の植物ウイルスにより崩壊した。かつて青々と茂っていた畑は荒野と化し、もはや我々にナスすべは無く、安全に根を張れる場所は防衛都市・那須のみとなった。
+                      あなたは、この都市のメインゲートで検問所の監視官を務めている。押し寄せる避難民の中から、健康な個体とウイルスに侵された不健康な個体を正確に仕分け、都市内部への侵入を防ぐ。」
+                    </blockquote>
+                  </ProductSection>
+
+                  <ProductSection title="モデル構成">
+                    <p className="mb-5 text-sm leading-7 text-neutral-600">
+                      ImageNet事前学習済みモデル3種のアンサンブル（Hard Voting）を使用しています。
+                    </p>
+                    <div className="grid gap-5 sm:grid-cols-3">
+                      {[
+                        ["ResNet-50", "25M パラメータ", "残差接続ベースの標準CNN"],
+                        ["DenseNet-201", "20M パラメータ", "全層の特徴を密に結合するCNN"],
+                        ["ConvNeXt-Base", "89M パラメータ", "Transformer知見で再設計されたCNN"],
+                      ].map(([name, size, description]) => (
+                        <div key={name} className="border-t border-neutral-300 pt-3">
+                          <p className="text-sm font-semibold">{name}</p>
+                          <p className="mt-1 text-xs text-neutral-500">{size}</p>
+                          <p className="mt-2 text-sm leading-6 text-neutral-600">{description}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </ProductSection>
+
+                  <ProductSection title="データセット">
+                    <p className="mb-4 text-sm text-neutral-600">画像数：1,400枚（Train: 980 / Val: 210 / Test: 210）</p>
+                    <div className="overflow-x-auto">
+                      <table className="w-full border-collapse text-left text-sm">
+                        <thead>
+                          <tr className="border-y border-neutral-300">
+                            <th className="w-16 py-2 font-medium text-neutral-500">ID</th>
+                            <th className="py-2 font-medium text-neutral-500">クラス名</th>
                           </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
+                        </thead>
+                        <tbody>
+                          {leafClasses.map(([id, name]) => (
+                            <tr key={id} className="border-b border-neutral-200">
+                              <td className="py-2 font-mono text-neutral-500">{id}</td>
+                              <td className="py-2 text-neutral-700">{name}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </ProductSection>
 
-                {/* Training Techniques */}
-                <div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
-                    <span className="text-xl">⚙️</span> 学習時の工夫
-                  </h3>
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                    {[
-                      "Data Augmentation",
-                      "Label Smoothing (0.1)",
-                      "Cosine Annealing LR",
-                      "Weight Decay (0.05)",
-                      "RandomErasing",
-                      "ColorJitter",
-                    ].map((tech) => (
-                      <div key={tech} className="bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-center">
-                        <p className="text-xs font-medium text-gray-700">{tech}</p>
+                  <ProductSection title="学習時の工夫">
+                    <p className="text-sm leading-7 text-neutral-600">{trainingTechniques.join(" / ")}</p>
+                  </ProductSection>
+
+                  <ProductSection title="テスト結果">
+                    <dl className="grid border-y border-neutral-300 sm:grid-cols-2">
+                      <div className="py-5 sm:border-r sm:border-neutral-300 sm:pr-6">
+                        <dt className="text-sm text-neutral-500">Accuracy</dt>
+                        <dd className="mt-1 text-2xl font-semibold">97.62%</dd>
+                        <p className="mt-1 text-xs text-neutral-500">205 / 210</p>
                       </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Results */}
-                <div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
-                    <span className="text-xl">🏆</span> テスト結果
-                  </h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="bg-green-50 border border-green-200 rounded-xl p-6 text-center">
-                      <p className="text-4xl font-extrabold text-green-700">97.62%</p>
-                      <p className="text-sm text-green-600 mt-1">Accuracy (205 / 210)</p>
-                    </div>
-                    <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 text-center">
-                      <p className="text-4xl font-extrabold text-blue-700">47.3 ms</p>
-                      <p className="text-sm text-blue-600 mt-1">推論速度 / 画像</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Epilogue */}
-                <div className="bg-gray-50 border border-gray-100 rounded-xl p-5 text-sm text-gray-600 leading-relaxed italic">
-                  「監視官であるあなたは、ResNet-50, DenseNet-201, ConvNeXt-Baseの3つのモデルをアンサンブルすることで、ナスを仕分けすることにした。
-                  だが、作ったモデルの精度が100%ではなかったため、病気のナスを都市内部に侵入させてしまい、ナスすべなく滅びたとさ。ちゃんちゃん」
-                </div>
-              </div>
-            </div>
-
-            {/* salmon-ai */}
-            <div className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
-              <div className="bg-gradient-to-r from-teal-500 to-emerald-600 px-8 py-8 relative">
-                <div className="absolute top-4 right-4 bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full backdrop-blur-sm border border-white/30">
-                  🤝 共同制作
-                </div>
-                <div className="flex items-center gap-3 mb-2">
-                  <span className="text-3xl">🐟</span>
-                  <h2 className="text-2xl font-bold text-white">salmon-ai</h2>
-                </div>
-                <p className="text-teal-50 text-sm">タスク管理、タイムブロッキング、進捗状況の可視化を備えたAI駆動アプリ</p>
-                <div className="flex flex-wrap gap-3 mt-4">
-                  <a
-                    href="https://salmon-ai.vercel.app"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center px-4 py-2 bg-white text-teal-700 hover:bg-teal-50 text-sm font-bold rounded-lg shadow-sm transition-colors"
-                  >
-                    Webサイトを開く →
-                  </a>
-                  <a
-                    href="https://github.com/KinuGra/salmon-ai"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 hover:bg-white/30 text-white text-sm font-medium rounded-lg backdrop-blur-sm transition-colors"
-                  >
-                    <GitHubIcon /> GitHub で見る →
-                  </a>
-                </div>
-              </div>
-
-              <div className="p-8 space-y-8">
-                {/* Tech Stack */}
-                <div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
-                    <span className="text-xl">🛠️</span> 使用技術
-                  </h3>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div className="bg-blue-50 border border-blue-100 rounded-xl p-4 text-center">
-                      <p className="font-bold text-blue-800 text-sm">Next.js (TypeScript)</p>
-                      <p className="text-xs text-gray-500 mt-1">Frontend</p>
-                    </div>
-                    <div className="bg-cyan-50 border border-cyan-100 rounded-xl p-4 text-center">
-                      <p className="font-bold text-cyan-800 text-sm">Go</p>
-                      <p className="text-xs text-gray-500 mt-1">Backend</p>
-                    </div>
-                    <div className="bg-yellow-50 border border-yellow-100 rounded-xl p-4 text-center">
-                      <p className="font-bold text-yellow-800 text-sm">Python</p>
-                      <p className="text-xs text-gray-500 mt-1">AI</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Features */}
-                <div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
-                    <span className="text-xl">✨</span> 主な機能
-                  </h3>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                    {[
-                      { icon: "✅", label: "タスクリスト" },
-                      { icon: "⏳", label: "タイムブロック" },
-                      { icon: "📊", label: "統計・サマリー" },
-                      { icon: "🤖", label: "AIサポート" },
-                    ].map(({ icon, label }) => (
-                      <div key={label} className="bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-center">
-                        <p className="text-sm font-medium text-gray-800">{icon} {label}</p>
+                      <div className="border-t border-neutral-300 py-5 sm:border-t-0 sm:pl-6">
+                        <dt className="text-sm text-neutral-500">推論速度</dt>
+                        <dd className="mt-1 text-2xl font-semibold">47.3 ms</dd>
+                        <p className="mt-1 text-xs text-neutral-500">1画像あたり</p>
                       </div>
-                    ))}
+                    </dl>
+                  </ProductSection>
+
+                  <ProductSection title="エピローグ">
+                    <blockquote className="border-l-2 border-neutral-300 pl-5 text-sm leading-7 text-neutral-600">
+                      「監視官であるあなたは、ResNet-50、DenseNet-201、ConvNeXt-Baseの3つのモデルをアンサンブルすることで、ナスを仕分けすることにした。
+                      だが、作ったモデルの精度が100%ではなかったため、病気のナスを都市内部に侵入させてしまい、ナスすべなく滅びたとさ。ちゃんちゃん」
+                    </blockquote>
+                  </ProductSection>
+                </div>
+              </article>
+
+              <article className="border-t border-neutral-400 pt-12">
+                <header className="mb-8">
+                  <p className="mb-2 text-sm text-neutral-500">共同制作</p>
+                  <h2 className="text-2xl font-semibold tracking-tight">salmon-ai</h2>
+                  <p className="mt-3 max-w-2xl text-sm leading-7 text-neutral-600">
+                    タスク管理、タイムブロッキング、進捗状況の可視化を備えたAI駆動アプリです。
+                  </p>
+                  <div className="mt-5 flex flex-wrap gap-x-6 gap-y-3">
+                    <ExternalLink href="https://salmon-ai.vercel.app">Webサイト</ExternalLink>
+                    <ExternalLink href="https://github.com/KinuGra/salmon-ai">
+                      <GitHubIcon /> GitHub
+                    </ExternalLink>
                   </div>
-                </div>
-              </div>
-            </div>
+                </header>
 
-            {/* SlayTheSpire2Vote */}
-            <div className="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
-              <div className="bg-gradient-to-r from-red-800 to-orange-700 px-8 py-8">
-                <div className="flex items-center gap-3 mb-2">
-                  <span className="text-3xl">⚔️</span>
-                  <h2 className="text-2xl font-bold text-white">Slay the Spire 2 カード強さ投票サイト</h2>
-                </div>
-                <p className="text-orange-100 text-sm">カードを S / A / B / C / D の5段階で評価・投票し、みんなの評価をリアルタイムで確認できるサイト</p>
-                <div className="flex flex-wrap gap-3 mt-4">
-                  <a
-                    href="https://slaythespire2vote.vercel.app"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center px-4 py-2 bg-white text-red-800 hover:bg-orange-50 text-sm font-bold rounded-lg shadow-sm transition-colors"
-                  >
-                    Webサイトを開く →
-                  </a>
-                  <a
-                    href="https://github.com/Nasubiman/SlayTheSpire2Vote"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 hover:bg-white/30 text-white text-sm font-medium rounded-lg backdrop-blur-sm transition-colors"
-                  >
-                    <GitHubIcon /> GitHub で見る →
-                  </a>
-                </div>
-              </div>
-
-              <div className="p-8 space-y-8">
-                {/* Tech tags */}
-                <div className="flex gap-2 flex-wrap">
-                  <span className="bg-blue-50 text-blue-700 border border-blue-200 text-xs font-bold px-3 py-1 rounded-full">TypeScript 97.7%</span>
-                  <span className="bg-gray-100 text-gray-600 border border-gray-200 text-xs font-bold px-3 py-1 rounded-full">Next.js</span>
-                  <span className="bg-gray-100 text-gray-600 border border-gray-200 text-xs font-bold px-3 py-1 rounded-full">Vercel</span>
-                </div>
-
-                {/* Features */}
-                <div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
-                    <span className="text-xl">✨</span> 主な機能
-                  </h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    {[
-                      { icon: "🃏", text: "キャラクター別カード一覧（6種）" },
-                      { icon: "🔍", text: "カードタイプでフィルタリング" },
-                      { icon: "🖼️", text: "強化前/後の画像切替" },
-                      { icon: "🗳️", text: "S〜D の5段階投票" },
-                      { icon: "📊", text: "投票結果をリアルタイム表示（棒グラフ）" },
-                      { icon: "🚫", text: "同一IPからの重複投票防止" },
-                    ].map(({ icon, text }) => (
-                      <div key={text} className="flex items-center gap-3 bg-gray-50 border border-gray-200 rounded-lg px-4 py-3">
-                        <span className="text-lg">{icon}</span>
-                        <p className="text-sm font-medium text-gray-800">{text}</p>
+                <div className="space-y-8">
+                  <ProductSection title="使用技術">
+                    <dl className="grid gap-4 text-sm sm:grid-cols-3">
+                      <div>
+                        <dt className="text-neutral-500">Frontend</dt>
+                        <dd className="mt-1 font-medium">Next.js / TypeScript</dd>
                       </div>
-                    ))}
-                  </div>
-                </div>
+                      <div>
+                        <dt className="text-neutral-500">Backend</dt>
+                        <dd className="mt-1 font-medium">Go</dd>
+                      </div>
+                      <div>
+                        <dt className="text-neutral-500">AI</dt>
+                        <dd className="mt-1 font-medium">Python</dd>
+                      </div>
+                    </dl>
+                  </ProductSection>
 
-                {/* Disclaimer */}
-                <div className="bg-orange-50 border border-orange-100 rounded-xl p-4 text-xs text-gray-500 leading-relaxed">
-                  ⚠️ カード画像・カード名は{" "}
-                  <a href="https://store.steampowered.com/app/1868140/Slay_the_Spire_2/" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-700">
-                    Slay the Spire 2
-                  </a>{" "}
-                  (MegaCrit) の著作物です。本サイトは非公式のファンサイトであり、MegaCrit とは一切関係ありません。
+                  <ProductSection title="主な機能">
+                    <ul className="grid list-disc gap-x-8 gap-y-2 pl-5 text-sm leading-6 text-neutral-700 sm:grid-cols-2">
+                      <li>タスクリスト</li>
+                      <li>タイムブロック</li>
+                      <li>統計・サマリー</li>
+                      <li>AIサポート</li>
+                    </ul>
+                  </ProductSection>
                 </div>
-              </div>
+              </article>
+
+              <article className="border-t border-neutral-400 pt-12">
+                <header className="mb-8">
+                  <p className="mb-2 text-sm text-neutral-500">Web Application</p>
+                  <h2 className="text-2xl font-semibold tracking-tight">Slay the Spire 2 カード強さ投票サイト</h2>
+                  <p className="mt-3 max-w-2xl text-sm leading-7 text-neutral-600">
+                    カードをS / A / B / C / Dの5段階で評価・投票し、集計結果をリアルタイムで確認できるサイトです。
+                  </p>
+                  <div className="mt-5 flex flex-wrap gap-x-6 gap-y-3">
+                    <ExternalLink href="https://slaythespire2vote.vercel.app">Webサイト</ExternalLink>
+                    <ExternalLink href="https://github.com/Nasubiman/SlayTheSpire2Vote">
+                      <GitHubIcon /> GitHub
+                    </ExternalLink>
+                  </div>
+                </header>
+
+                <div className="space-y-8">
+                  <ProductSection title="使用技術">
+                    <p className="text-sm leading-7 text-neutral-600">TypeScript / Next.js / Vercel</p>
+                  </ProductSection>
+
+                  <ProductSection title="主な機能">
+                    <ul className="grid list-disc gap-x-8 gap-y-2 pl-5 text-sm leading-6 text-neutral-700 sm:grid-cols-2">
+                      <li>キャラクター別カード一覧（6種）</li>
+                      <li>カードタイプでフィルタリング</li>
+                      <li>強化前・強化後の画像切替</li>
+                      <li>S〜Dの5段階投票</li>
+                      <li>投票結果のリアルタイム表示</li>
+                      <li>同一IPからの重複投票防止</li>
+                    </ul>
+                  </ProductSection>
+
+                  <p className="border-t border-neutral-200 pt-5 text-xs leading-6 text-neutral-500">
+                    カード画像・カード名は
+                    <a
+                      href="https://store.steampowered.com/app/1868140/Slay_the_Spire_2/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mx-1 underline decoration-neutral-300 underline-offset-4 hover:text-neutral-900"
+                    >
+                      Slay the Spire 2
+                    </a>
+                    （MegaCrit）の著作物です。本サイトは非公式のファンサイトであり、MegaCritとは関係ありません。
+                  </p>
+                </div>
+              </article>
             </div>
-          </section>
+          </div>
         )}
-
       </main>
 
-      {/* Footer */}
-      <footer className="bg-white border-t border-gray-200 mt-12 py-10">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <span className="text-sm font-bold text-gray-900">Nasubiman</span>
-            <a
-              href="https://github.com/Nasubiman"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-400 hover:text-gray-700 transition-colors"
-              aria-label="GitHub"
-            >
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.92.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
-              </svg>
-            </a>
-            <p className="text-sm text-gray-400">
-              &copy; {new Date().getFullYear()} Nasubiman. All rights reserved.
-            </p>
-          </div>
+      <footer className="border-t border-neutral-300">
+        <div className="mx-auto flex max-w-3xl flex-col gap-3 px-5 py-8 text-xs text-neutral-500 sm:flex-row sm:items-center sm:justify-between sm:px-8">
+          <span>Nasubiman</span>
+          <a href="https://github.com/Nasubiman" target="_blank" rel="noopener noreferrer" className="hover:text-neutral-900">
+            GitHub
+          </a>
+          <span>&copy; {new Date().getFullYear()} Nasubiman</span>
         </div>
       </footer>
     </div>
